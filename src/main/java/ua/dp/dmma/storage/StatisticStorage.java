@@ -49,14 +49,11 @@ public enum StatisticStorage
 
     private void initializeStorageCleaner()
     {
-        Thread thread = new Thread(() ->
-        {
+        Thread thread = new Thread(() -> {
             try
             {
                 while (true)
                 {
-                    Thread.sleep(TimeUnit.SECONDS.toMillis(1L));
-
                     Instant oldestValidTime = Instant.now();
                     Iterator<StatisticStorageData> iterator = expiringStatisticStorage.iterator();
 
@@ -69,8 +66,17 @@ public enum StatisticStorage
                         }
                     }
 
-                    latestStatisticData = createStatisticData(
-                                    expiringStatisticStorage.stream().collect(Collectors.summarizingInt(StatisticStorageData::getCount)));
+                    if (expiringStatisticStorage.isEmpty())
+                    {
+                        latestStatisticData = new StatisticData();
+                    }
+                    else
+                    {
+                        latestStatisticData = createStatisticData(
+                                        expiringStatisticStorage.stream().collect(Collectors.summarizingInt(StatisticStorageData::getCount)));
+                    }
+
+                    Thread.sleep(TimeUnit.SECONDS.toMillis(1L));
                 }
             }
             catch (InterruptedException e)
