@@ -3,6 +3,7 @@ package ua.dp.dmma.resource;
 import org.junit.Before;
 import org.junit.Test;
 import ua.dp.dmma.pojo.PanoramaUploadData;
+import ua.dp.dmma.pojo.StatisticData;
 
 import javax.ws.rs.core.Response;
 
@@ -38,6 +39,13 @@ public class PanoramaResourceTest
         Response response = panoramaResource.uploadPanorama(createPanoramaUploadData(1, Instant.now().minusSeconds(100).getEpochSecond()));
         assertNotNull(response);
         assertTrue(Response.Status.NO_CONTENT.getStatusCode() == response.getStatus());
+    }
+
+    @Test
+    public void testGetStatisticData()
+    {
+        StatisticData statisticData = panoramaResource.getStatisticData();
+        assertNotNull(statisticData);
     }
 
     private PanoramaUploadData createPanoramaUploadData(int count, long timestamp)
