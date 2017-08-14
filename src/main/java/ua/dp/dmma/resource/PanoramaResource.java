@@ -7,14 +7,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.time.Instant;
 
+import static ua.dp.dmma.storage.StatisticStorage.STATISTIC_KEEPING_TIME;
+import static ua.dp.dmma.storage.StatisticStorage.STATISTIC_STORAGE;
+
 /**
  * @author dmma
  */
 @Path("panorama")
 public class PanoramaResource
 {
-    private static final long STATISTIC_KEEPING_TIME = 60L;
-
     @Path("upload")
     @POST
     @Consumes("application/json")
@@ -24,7 +25,7 @@ public class PanoramaResource
         {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
-
+        STATISTIC_STORAGE.add(panoramaUploadData.getTimestamp(), panoramaUploadData.getCount());
         return Response.status(Response.Status.CREATED).build();
     }
 
@@ -33,9 +34,7 @@ public class PanoramaResource
     @Produces("application/json")
     public StatisticData getStatisticData()
     {
-        StatisticData statisticData = new StatisticData();
-        statisticData.setSum(4);
-        return statisticData;
+        return STATISTIC_STORAGE.getLatestStatisticData();
     }
 
     /**

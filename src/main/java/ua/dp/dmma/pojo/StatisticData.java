@@ -8,22 +8,22 @@ import javax.json.bind.annotation.JsonbProperty;
 public class StatisticData
 {
     @JsonbProperty
-    private int sum;
+    private long sum;
     @JsonbProperty
     private double avg;
     @JsonbProperty
-    private int max;
+    private long max;
     @JsonbProperty
-    private int min;
+    private long min;
     @JsonbProperty
-    private int count;
+    private long count;
 
-    public int getSum()
+    public long getSum()
     {
         return sum;
     }
 
-    public void setSum(int sum)
+    public void setSum(long sum)
     {
         this.sum = sum;
     }
@@ -38,32 +38,32 @@ public class StatisticData
         this.avg = avg;
     }
 
-    public int getMax()
+    public long getMax()
     {
         return max;
     }
 
-    public void setMax(int max)
+    public void setMax(long max)
     {
         this.max = max;
     }
 
-    public int getMin()
+    public long getMin()
     {
         return min;
     }
 
-    public void setMin(int min)
+    public void setMin(long min)
     {
         this.min = min;
     }
 
-    public int getCount()
+    public long getCount()
     {
         return count;
     }
 
-    public void setCount(int count)
+    public void setCount(long count)
     {
         this.count = count;
     }
