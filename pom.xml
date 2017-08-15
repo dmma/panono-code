@@ -42,15 +42,15 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.test-framework.providers</groupId>
+            <artifactId>jersey-test-framework-provider-external</artifactId>
+            <version>${jersey.version}</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.test-framework.providers</groupId>
@@ -112,4 +112,31 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <!-- mvn test -Prun-external-tests -->
+            <id>run-external-tests</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <systemProperties>
+                                <jersey.config.test.container.factory>${external.container.factory}</jersey.config.test.container.factory>
+                                <jersey.config.test.container.port>${external.container.port}</jersey.config.test.container.port>
+                            </systemProperties>
+                            <groups>ua.dp.dmma.category.External</groups>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <properties>
+                <!-- External test container configuration is done via properties to allow overriding via command line. -->
+                <external.container.factory>org.glassfish.jersey.test.external.ExternalTestContainerFactory</external.container.factory>
+                <external.container.port>7707</external.container.port>
+                <maven.test.skip>false</maven.test.skip>
+            </properties>
+        </profile>
+    </profiles>
 </project>
