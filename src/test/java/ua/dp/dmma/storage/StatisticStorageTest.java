@@ -2,7 +2,7 @@ package ua.dp.dmma.storage;
 
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import ua.dp.dmma.Unit;
+import ua.dp.dmma.category.Unit;
 import ua.dp.dmma.pojo.StatisticData;
 
 import java.time.Instant;

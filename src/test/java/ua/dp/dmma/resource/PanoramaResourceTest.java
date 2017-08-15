@@ -1,11 +1,13 @@
 package ua.dp.dmma.resource;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import ua.dp.dmma.Unit;
+import ua.dp.dmma.category.Unit;
 import ua.dp.dmma.pojo.PanoramaUploadData;
 import ua.dp.dmma.pojo.StatisticData;
+import ua.dp.dmma.storage.StatisticStorage;
 
 import javax.ws.rs.core.Response;
 
@@ -49,6 +51,12 @@ public class PanoramaResourceTest
     {
         StatisticData statisticData = panoramaResource.getStatisticData();
         assertNotNull(statisticData);
+    }
+
+    @After
+    public void tearDown()
+    {
+        StatisticStorage.STATISTIC_STORAGE.clearStorage();
     }
 
     private PanoramaUploadData createPanoramaUploadData(int count, long timestamp)

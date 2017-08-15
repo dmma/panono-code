@@ -1,4 +1,4 @@
-package ua.dp.dmma;
+package ua.dp.dmma.category;
 
 /**
  * @author dmma

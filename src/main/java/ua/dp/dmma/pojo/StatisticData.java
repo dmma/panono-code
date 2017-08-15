@@ -67,4 +67,10 @@ public class StatisticData
     {
         this.count = count;
     }
+
+    @Override
+    public String toString()
+    {
+        return "StatisticData{" + "sum=" + sum + ", avg=" + avg + ", max=" + max + ", min=" + min + ", count=" + count + '}';
+    }
 }

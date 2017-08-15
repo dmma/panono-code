@@ -89,6 +89,12 @@ public enum StatisticStorage
         thread.start();
     }
 
+    public void clearStorage()
+    {
+        expiringStatisticStorage.clear();
+        latestStatisticData = new StatisticData();
+    }
+
     private StatisticData createStatisticData(IntSummaryStatistics statistics)
     {
         StatisticData statisticData = new StatisticData();
